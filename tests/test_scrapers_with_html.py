@@ -28,7 +28,7 @@ def get_test_files():
 
 def load_html(file_path):
     try:
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             return BeautifulSoup(file.read(), "html.parser")
     except Exception as e:
         print(f"Error loading HTML file {file_path}: {e}")
@@ -65,7 +65,7 @@ def test_scraper(mocker, scraper_module, html_file, exp_output_file):
     scraper_class = find_class(module, module_name)
 
     # Read the HTML content from the file
-    with open(html_file, "r") as file:
+    with open(html_file, "r", encoding="utf-8") as file:
         html_content = file.read()
 
     # Instantiate the scraper using the HTML content
@@ -80,7 +80,7 @@ def test_scraper(mocker, scraper_module, html_file, exp_output_file):
 
     # Load expected results
     expected_links = []
-    with open(exp_output_file, newline="") as csvfile:
+    with open(exp_output_file, newline="", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             expected_links.extend(row)
